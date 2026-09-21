@@ -10,19 +10,24 @@
     <div class="login">
     <h1>SISTEMA TECH</h1>
     <h2>Entrar</h2>
-    <form action="">
+    <form id="loginForm">
 
     <label for="email">E-mail</label>
     <input type="email" id="email">
+    <p id="emailError"></p>
 
     <label for="password">Senha</label>
     <input type="password" id="password">
-    <button>Entrar</button>
+    <p id="passwordError"></p>
+
+    <button type="submit">Entrar</button>
+    <p id="sucessMessage"></p>
 
 </form>
 <a href="">Esqueci minha senha</a>
 <a href=""> Não tenho cadastro</a>
 </div>
+<script src="script.js"></script>
 
 </body>
 </html>
