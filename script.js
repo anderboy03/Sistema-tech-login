@@ -1,52 +1,81 @@
 const form = document.getElementById("loginForm");
 
+const emailInput = document.getElementById("email");
+const senhaInput = document.getElementById("password");
+
+const emailError = document.getElementById("emailError");
+const passwordError = document.getElementById("passwordError");
+const successMessage = document.getElementById("successMessage");
+
+
+// QUANDO ENVIAR O FORMULÁRIO
 form.addEventListener("submit", function(event) {
     event.preventDefault();
-   
 
-    const email = document.getElementById("email").value;
-    const senha = document.getElementById("password").value;
+    const email = emailInput.value;
+    const senha = senhaInput.value;
 
-    const emailError = document.getElementById("emailError");
-    const passwordError = document.getElementById("passwordError");
-    const successMessage = document.getElementById("successMessage");
-
-    console.log(emailError);
-console.log(passwordError);
-console.log(successMessage);
-
-    document.getElementById("email").classList.remove("erro", "sucesso");
-document.getElementById("password").classList.remove("erro", "sucesso");
-
+    // Limpa mensagens
     emailError.textContent = "";
     passwordError.textContent = "";
     successMessage.textContent = "";
 
+    // Limpa classes anteriores
+    emailInput.classList.remove("erro", "sucesso");
+    senhaInput.classList.remove("erro", "sucesso");
+
+
+    // VALIDAÇÃO DO E-MAIL
     if (email === "") {
         emailError.textContent = "Digite seu e-mail!";
-        document.getElementById("email").classList.add("erro");
+        emailInput.classList.add("erro");
         return;
     }
-    const emailValido = email.includes("@");
-    if(!emailValido){
+
+    if (!email.includes("@")) {
         emailError.textContent = "Digite um e-mail válido!";
-        document.getElementById("email").classList.add("erro");
+        emailInput.classList.add("erro");
         return;
-        
-
     }
 
+    emailInput.classList.add("sucesso");
+
+
+    // VALIDAÇÃO DA SENHA
     if (senha === "") {
         passwordError.textContent = "Digite a senha!";
-        document.getElementById("password").classList.add("erro");
+        senhaInput.classList.add("erro");
         return;
     }
-    
 
+    if (senha.length < 6) {
+        passwordError.textContent = "A senha deve ter pelo menos 6 caracteres!";
+        senhaInput.classList.add("erro");
+        return;
+    }
+
+    senhaInput.classList.add("sucesso");
+
+
+    // SUCESSO
     successMessage.textContent = "Login realizado com sucesso!";
-    document.getElementById("email").classList.add("sucesso");
-    document.getElementById("password").classList.add("sucesso");
 
-    
+    emailInput.value = "";
+    senhaInput.value = "";
+
+    passwordError.textContent = "apagar a mensagem de erro da senha";
 });
-console.log("JavaScript funcionando!");
+
+emailInput.addEventListener("input", function() {
+    emailError.textContent = "";
+    emailInput.classList.remove("erro");
+});
+
+senhaInput.addEventListener("input", function() {
+    
+    passwordError.textContent = "";
+    senhaInput.classList.remove("erro");
+});
+
+
+
